@@ -7,7 +7,7 @@ Create environments, deploy, and manage cloud-native apps without worrying about
 
 ```json
 "features": {
-    "ghcr.io/oleksis/playground-cli/napptive-playground-cli:1": {
+    "ghcr.io/oleksis/playground-cli/playground-cli:1": {
         "version": "4.3.0"
     }
 }

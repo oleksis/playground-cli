@@ -1,19 +1,19 @@
 #!/bin/bash
 
 # This test file will be executed against an auto-generated devcontainer.json that
-# includes the 'napptive-playground-cli' feature with no options.
+# includes the 'playground-cli' feature with no options.
 #
 # Eg:
 # {
 #    "image": "<..some-base-image...>",
 #    "features": {
-#      "napptive-playground-cli": {}
+#      "playground-cli": {}
 #    }
 # }
 #
 # Thus, the value of all options will fall back to the default value in 
 # the feature's 'devcontainer-feature.json'.
-# For the 'napptive-playground-cli' feature, that means the default favorite greeting is '4.3.0'.
+# For the 'playground-cli' feature, that means the default favorite greeting is '4.3.0'.
 #
 # These scripts are run as 'root' by default. Although that can be changed
 # with the --remote-user flag.

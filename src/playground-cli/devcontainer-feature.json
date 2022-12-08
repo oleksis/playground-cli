@@ -1,6 +1,6 @@
 {
     "name": "NAPPTIVE Playground CLI",
-    "id": "napptive-playground-cli",
+    "id": "playground-cli",
     "version": "4.3.0",
     "documentationURL": "https://github.com/oleksis/playground-cli",
     "description": "Create environments, deploy, and manage cloud-native apps without worrying about Kubernetes",
