@@ -1,5 +1,5 @@
 
-# NAPPTIVE Playground CLI
+# NAPPTIVE Playground CLI (playground-cli)
 
 Create environments, deploy, and manage cloud-native apps without worrying about Kubernetes
 
@@ -7,9 +7,7 @@ Create environments, deploy, and manage cloud-native apps without worrying about
 
 ```json
 "features": {
-    "ghcr.io/oleksis/playground-cli/playground-cli:1": {
-        "version": "4.3.0"
-    }
+    "ghcr.io/oleksis/playground-cli/playground-cli:4": {}
 }
 ```
 
@@ -23,4 +21,4 @@ Create environments, deploy, and manage cloud-native apps without worrying about
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/devcontainers/feature-starter/blob/main/src/hello/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/oleksis/playground-cli/blob/main/src/playground-cli/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
