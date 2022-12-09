@@ -1,65 +1,34 @@
-# Dev Container Features: Self Authoring Template
+# NAPPTIVE Playground CLI (playground-cli)
 
-> This repo provides a starting point and example for creating your own custom [dev container Features](https://containers.dev/implementors/features/), hosted for free on GitHub Container Registry.  The example in this repository follows the [dev container Feature distribution specification](https://containers.dev/implementors/features-distribution/).  
->
-> To provide feedback to the specification, please leave a comment [on spec issue #70](https://github.com/devcontainers/spec/issues/70). For more broad feedback regarding dev container Features, please see [spec issue #61](https://github.com/devcontainers/spec/issues/61).
+Create environments, deploy, and manage cloud-native apps without worrying about Kubernetes
 
-## Example Contents
+## Example Usage
 
-This repository contains a _collection_ of two Features - `hello` and `color`. These Features serve as simple feature implementations.  Each sub-section below shows a sample `devcontainer.json` alongside example usage of the Feature.
+This repository contains a _collection_ of one Features - `playground-cli`. The sub-section below shows a sample `devcontainer.json` alongside example usage of the Feature.
 
-### `hello`
+### `playground-cli`
 
-Running `hello` inside the built container will print the greeting provided to it via its `greeting` option.
+Running `playground-cli` inside the built container.
 
-```jsonc
-{
-    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-    "features": {
-        "ghcr.io/devcontainers/feature-starter/hello:1": {
-            "greeting": "Hello"
-        }
-    }
+```json
+"features": {
+    "ghcr.io/oleksis/playground-cli/playground-cli:4": {}
 }
 ```
 
 ```bash
-$ hello
+$ playground --version
 
-Hello, user.
-```
-
-### `color`
-
-Running `color` inside the built container will print your favorite color to standard out.
-
-```jsonc
-{
-    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-    "features": {
-        "ghcr.io/devcontainers/feature-starter/color:1": {
-            "favorite": "green"
-        }
-    }
-}
-```
-
-```bash
-$ color
-
-my favorite color is green
+v4.3.0 [d28c04acdaca4966f52e5a483e500f28b86a1ae3]
 ```
 
 ## Repo and Feature Structure
 
-Similar to the [`devcontainers/features`](https://github.com/devcontainers/features) repo, this repository has a `src` folder.  Each Feature has its own sub-folder, containing at least a `devcontainer-feature.json` and an entrypoint script `install.sh`. 
+Similar to the [`devcontainers/features`](https://github.com/devcontainers/features) repo, this repository has a `src` folder. The Feature has its own sub-folder, containing at least a `devcontainer-feature.json` and an entrypoint script `install.sh`. 
 
 ```
 ├── src
-│   ├── hello
-│   │   ├── devcontainer-feature.json
-│   │   └── install.sh
-│   ├── color
+│   ├── playground-cli
 │   │   ├── devcontainer-feature.json
 │   │   └── install.sh
 |   ├── ...
@@ -74,21 +43,20 @@ An [implementing tool](https://containers.dev/supporting#tools) will composite [
 
 All available options for a Feature should be declared in the `devcontainer-feature.json`.  The syntax for the `options` property can be found in the [devcontainer Feature json properties reference](https://containers.dev/implementors/features/#devcontainer-feature-json-properties).
 
-For example, the `color` feature provides an enum of three possible options (`red`, `gold`, `green`).  If no option is provided in a user's `devcontainer.json`, the value is set to "red".
+For example, the `playground-cli` feature provides an proposals of two possible options (`latest`, `4.3.0`).  If no option is provided in a user's `devcontainer.json`, the value is set to "4.3.0".
 
 ```jsonc
 {
     // ...
     "options": {
-        "favorite": {
+        "version": {
             "type": "string",
-            "enum": [
-                "red",
-                "gold",
-                "green"
+            "proposals": [
+                "latest",
+                "4.3.0"
             ],
-            "default": "red",
-            "description": "Choose your favorite color."
+            "default": "4.3.0",
+            "description": "Select or enter a NAPPTIVE Playground CLI version"
         }
     }
 }
@@ -97,10 +65,11 @@ For example, the `color` feature provides an enum of three possible options (`re
 Options are exported as Feature-scoped environment variables.  The option name is captialized and sanitized according to [option resolution](https://containers.dev/implementors/features/#option-resolution).
 
 ```bash
-#!/bin/bash
+#!/bin/sh
+set -e
 
-echo "Activating feature 'color'"
-echo "The provided favorite color is: ${FAVORITE}"
+PLAYGROUND_VERSION=${VERSION}
+echo "Activating feature 'playground-cli' version v${VERSION}"
 
 ...
 ```
@@ -122,13 +91,12 @@ Features are meant to be easily sharable units of dev container configuration an
 This repo contains a GitHub Action [workflow](.github/workflows/release.yaml) that will publish each feature to GHCR.  By default, each Feature will be prefixed with the `<owner/<repo>` namespace.  For example, the two Features in this repository can be referenced in a `devcontainer.json` with:
 
 ```
-ghcr.io/devcontainers/feature-starter/color:1
-ghcr.io/devcontainers/feature-starter/hello:1
+ghcr.io/oleksis/playground-cli/playground-cli:4
 ```
 
-The provided GitHub Action will also publish a third "metadata" package with just the namespace, eg: `ghcr.io/devcontainers/feature-starter`.  This contains information useful for tools aiding in Feature discovery.
+The provided GitHub Action will also publish a third "metadata" package with just the namespace, eg: `ghcr.io/oleksis/playground-cli/`.  This contains information useful for tools aiding in Feature discovery.
 
-'`devcontainers/feature-starter`' is known as the feature collection namespace.
+'`oleksis/playground-cli/`' is known as the feature collection namespace.
 
 ### Marking Feature Public
 
@@ -164,8 +132,8 @@ An example `devcontainer.json` can be found below.
 {
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     "features": {
-     "ghcr.io/my-org/private-features/hello:1": {
-            "greeting": "Hello"
+     "ghcr.io/oleksis/playground-cli/playground-cli:4": {
+            "version": "4.3.0"
         }
     },
     "customizations": {
